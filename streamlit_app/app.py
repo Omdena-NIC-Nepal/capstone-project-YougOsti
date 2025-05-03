@@ -12,6 +12,11 @@ from utils.biodiversity import load_threatened_data, plot_threatened_trend
 from utils.landcover import load_raster_resampled, compute_landcover_change, plot_landcover_change
 
 # ─── Load & clean climate data once ────────────────────────────────────────────
+from utils.download_data import download_all_data
+
+# Ensure data is available
+download_all_data()
+
 csv_path = "Data/Raw/Weather&Climate_data/dailyclimate_OpenDataNpl.csv"
 df_raw   = load_data(csv_path)
 df_clean = clean_data(df_raw)
