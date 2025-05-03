@@ -1,0 +1,397 @@
+Station,District,Elevation(masl),Max,Min,Year
+Baitadi Gothalapani ,Baitadi,1352.0,24.8,7.1,2017
+Patan West ,Baitadi,1292.0,26.4,14.0,2017
+Dadeldhura,Dadeldhura,1879.0,22.0,12.0,2017
+Mahendra Nagar,Kanchanpur,197.0,30.8,18.0,2017
+Darchula,Darchula,945.0,27.0,15.0,2017
+Dainsili Sidhhapur ,Baitadi,2083.0,21.0,14.0,2017
+Darchula New,Darchula,887.0,29.1,15.0,2017
+Patan new,Baitadi,1299.0,25.0,14.0,2017
+Silgadhi Doti,Doti,1309.0,26.4,14.0,2017
+Bajura Martadi ,Bajura,1598.0,24.5,13.0,2017
+Tikapur,Kailali,149.0,31.8,17.0,2017
+Dhangadhi Attariya ,Kailali,184.0,31.2,18.0,2017
+Godavari West ,Kailali,280.0,31.1,20.0,2017
+Mangalsen,Achham,1310.0,25.7,14.0,2017
+Dipayal Doti ,Doti,563.0,30.9,16.0,2017
+Oli Gaun Patkani ,Achham,989.0,28.1,14.0,2017
+Jumla,Jumla,2363.0,21.7,6.3,2017
+Gam Shree Nagar,Mugu,2113.0,23.7,11.0,2017
+Nagma,Kalikot,2017.0,22.7,9.1,2017
+Dipal Gaun,Jumla,2422.0,22.4,5.5,2017
+Simikot,Humla,2993.0,16.3,6.3,2017
+Dunai,Dolpa,2098.0,20.8,11.0,2017
+Manma,kalikot,1729.0,23.5,9.7,2017
+Jumla Airport,Jumla,2384.0,21.8,3.6,2017
+Dailekh,Dailekh,1394.0,26.0,16.0,2017
+"Surkhet Airport, Birendranagar ",Surkhet,683.0,29.5,16.0,2017
+Gulariya,Bardiya,126.0,30.9,19.0,2017
+Khajura Nepalganj ,Banke,129.0,31.6,19.0,2017
+Nepalgunj Reg Off ,Banke,141.0,31.1,20.0,2017
+Rani Jaruwa Nursery,Bardiya,145.0,31.3,18.0,2017
+Sikta,Banke,161.0,31.9,18.0,2017
+Libang Gaun,Rolpa,1314.0,26.6,14.0,2017
+Bijuwar Tar,Pyuthan,835.0,29.9,16.0,2017
+Salyan Bazar,Salyan,1557.0,25.9,15.0,2017
+Chaurjhari Tar,Rukum,863.0,28.9,15.0,2017
+Musikot Rukumkot ,Rukum,1412.0,25.3,14.0,2017
+Ghorai Dang ,Dang,663.0,29.3,17.0,2017
+Jomsom,Mustang,0.0,18.4,6.1,2017
+Thakmarpha,Mustang,2655.0,18.1,3.9,2017
+Baglung,Baglung,964.0,28.1,15.0,2017
+Chhoser,Mustang,3886.0,14.4,0.5,2017
+Tansen,Palpa,1183.0,26.3,13.0,2017
+Bhairahawa Airport,Rupandehi,108.0,31.5,19.0,2017
+Dumkauli,Nawalpur,183.0,33.6,19.0,2017
+Bhairahawa Agric ,Rupandehi,112.0,31.7,19.0,2017
+Parasi,Nawalparasi,112.0,31.4,19.0,2017
+Khanchikot,Arghakhachi,1801.0,21.9,13.0,2017
+Taulihawa,Kapilvastu,106.0,31.1,19.0,2017
+Tamghas,Gulmi,1547.0,23.9,12.0,2017
+Semari,Nawalparasi,110.0,32.1,19.0,2017
+Lumbini,Rupandehi,95.0,31.8,19.0,2017
+Sandhikharka,Arghakhachi,1030.0,27.6,14.0,2017
+Khudi Bazar,Lamjung,838.0,28.4,15.0,2017
+Pokhara Airport,Kaski,803.9,27.9,16.0,2017
+Syangja,Syangja,871.0,28.2,16.0,2017
+Bandipur,Tanahu,991.0,27.3,15.0,2017
+Gorkha Birenchowk ,Gorkha,724.0,28.1,17.0,2017
+Malepatan Pokhara ,Kaski,859.0,27.9,15.0,2017
+Lumle,Kaski,1738.0,20.7,12.0,2017
+Khairini Tar,Tanahun,515.0,30.1,17.0,2017
+Dandaswara,Syangja,1316.0,24.4,15.0,2017
+Ghalekharka,Kaski,1665.0,21.9,13.0,2017
+Begnas,Kaski,682.0,29.6,16.0,2017
+Rampur,Chitwan,189.0,31.0,18.0,2017
+Daman,Makwanpur,2265.0,19.3,9.0,2017
+Hetauda N F I ,Makwanpur,452.0,29.6,18.0,2017
+Simara Airport,Bara,137.0,30.9,18.0,2017
+Parwanipur,Bara,87.0,30.5,19.0,2017
+Birganj,Parsa,67.0,31.8,20.0,2017
+Bharatpur,Chitwan,216.0,31.8,20.0,2017
+Kakani,Nuwakot,2002.0,21.1,12.0,2017
+Chautara,Sindhupalchok,1552.0,25.4,14.0,2017
+Sarmathang,Sindhupalchok,2574.0,16.4,7.8,2017
+Khumaltar,Lalitpur,1334.0,25.4,13.0,2017
+Kathmandu Airport,,1337.0,26.2,13.0,2017
+Dhunibesi,Dhading,991.0,27.8,16.0,2017
+Panipokhari Kathmandu ,Kathmandu,1329.0,29.2,14.0,2017
+Bhaktapur,Bhaktapur,1315.0,26.9,12.0,2017
+Pansayakhola,Nuwakot,1982.0,20.8,13.0,2017
+Changu Narayan,Bhaktapur,1502.0,24.8,13.0,2017
+Khokana,Lalitpur,1309.0,25.9,12.0,2017
+Charikot,Dolakha,2132.0,23.8,10.0,2017
+Jiri,Dolakha,1877.0,21.4,8.8,2017
+Janakpur Airport,Dhanusha,76.0,31.2,20.0,2017
+Hardinath,Dhanusha,93.0,30.4,20.0,2017
+Manusmara,Sarlahi,90.0,30.7,19.0,2017
+Karmaiya,Sarlahi,139.0,31.7,20.0,2017
+Manthali,Ramechhap,497.0,31.2,17.0,2017
+Kabre,Dolakha,1755.0,23.1,13.0,2017
+Phattepur,Saptari,101.0,32.1,20.0,2017
+Lahan,Siraha,110.0,31.1,20.0,2017
+Siraha,,63.0,32.1,14.0,2017
+Diktel,Khotang,1612.0,23.0,14.0,2017
+Rajbiraj,Saptari,68.0,30.0,21.0,2017
+Chainpur East ,Sankhuwasabha,1277.0,25.8,15.0,2017
+Pakhribas,Dhankuta,1720.0,21.5,13.0,2017
+Dhankuta,Dhankuta,1192.0,25.5,16.0,2017
+Dharan Bazar,sunsari,310.0,30.5,21.0,2017
+Biratnagar Airport,Morang,72.0,31.1,20.0,2017
+Tarahara,Sunsari,120.0,31.3,19.0,2017
+Khadbari,Sankhuwasabha,1064.0,24.9,17.0,2017
+Taplejung,Taplejung,1744.0,22.9,13.0,2017
+Ilam Tea Estate,Ilam,1208.0,24.3,12.0,2017
+Damak,Jhapa,119.0,31.6,19.0,2017
+Kechana,Jhapa,71.0,30.8,20.0,2017
+Nuwakot,Nuwakot,966.0,27.9,17.0,2017
+Chisapani Karnali ,Kailali,201.0,30.2,20.0,2017
+Jyamirebari,,1525.0,23.0,13.0,2017
+Lete,Mustang,2617.0,17.6,7.2,2017
+Okhaldhunga,,1725.0,22.8,13.0,2017
+Baitadi Gothalapani ,Baitadi,1352.0,26.0,9.4,2018
+Patan West ,Baitadi,1292.0,25.8,13.0,2018
+Dadeldhura,Dadeldhura,1879.0,21.8,12.0,2018
+Mahendra Nagar,Kanchanpur,197.0,30.2,18.0,2018
+Darchula,Darchula,945.0,26.3,14.0,2018
+Darchula New,Darchula,887.0,28.6,15.0,2018
+Patan new,Baitadi,1299.0,24.7,13.0,2018
+Silgadhi Doti,Doti,1309.0,26.2,14.0,2018
+Bajura Martadi ,Bajura,1598.0,24.1,12.0,2018
+Tikapur,Kailali,149.0,31.2,17.0,2018
+Dhangadhi Attariya ,Kailali,184.0,30.8,18.0,2018
+Godavari West ,Kailali,280.0,31.3,20.0,2018
+Dipayal Doti ,Doti,563.0,30.9,15.0,2018
+Oli Gaun Patkani ,Achham,989.0,29.1,14.0,2018
+Chainpur Bajhang AWS,,1405.0,26.0,13.0,2018
+Jumla,Jumla,2363.0,21.8,5.6,2018
+Gam Shree Nagar,Mugu,2113.0,24.0,10.0,2018
+Rara,Mugu,2989.0,15.8,3.7,2018
+Nagma,Kalikot,2017.0,22.5,8.2,2018
+Dipal Gaun,Jumla,2422.0,23.4,4.9,2018
+Simikot,Humla,2993.0,16.0,5.6,2018
+Dunai,Dolpa,2098.0,22.1,9.9,2018
+Manma,kalikot,1729.0,23.4,10.0,2018
+Jumla Airport,Jumla,2384.0,21.6,4.6,2018
+Dailekh,Dailekh,1394.0,26.5,14.0,2018
+"Surkhet Airport, Birendranagar ",Surkhet,683.0,29.0,15.0,2018
+Gulariya,Bardiya,126.0,30.4,18.0,2018
+Khajura Nepalganj ,Banke,129.0,30.9,18.0,2018
+Nepalgunj Reg Off ,Banke,141.0,30.2,19.0,2018
+Sikta,Banke,161.0,31.2,18.0,2018
+Mehalkuna,Surkhet,464.0,30.5,16.0,2018
+Libang Gaun,Rolpa,1314.0,26.6,14.0,2018
+Bijuwar Tar,Pyuthan,835.0,29.5,15.0,2018
+Tulsipur,Dang,683.0,27.7,17.0,2018
+Salyan Bazar,Salyan,1557.0,25.0,14.0,2018
+Chaurjhari Tar,Rukum,863.0,28.7,14.0,2018
+Musikot Rukumkot ,Rukum,1412.0,25.0,13.0,2018
+Ghorai Dang ,Dang,663.0,28.9,16.0,2018
+Jomsom,Mustang,0.0,17.8,5.6,2018
+Thakmarpha,Mustang,2655.0,17.6,3.6,2018
+Kushma,Parbat,900.0,28.5,15.0,2018
+Tansen,Palpa,1183.0,25.8,15.0,2018
+Bhairahawa Airport,Rupandehi,108.0,30.7,18.0,2018
+Dumkauli,Nawalpur,183.0,32.7,19.0,2018
+Bhairahawa Agric ,Rupandehi,112.0,31.0,19.0,2018
+Parasi,Nawalparasi,112.0,31.8,19.0,2018
+Khanchikot,Arghakhachi,1801.0,21.2,13.0,2018
+Taulihawa,Kapilvastu,106.0,30.1,19.0,2018
+Tamghas,Gulmi,1547.0,23.4,12.0,2018
+Semari,Nawalparasi,110.0,30.9,18.0,2018
+Lumbini,Rupandehi,95.0,30.9,18.0,2018
+Anp Chour,,738.0,30.4,15.0,2018
+Sandhikharka,Arghakhachi,1030.0,26.9,14.0,2018
+Pokhara Airport,Kaski,803.9,27.3,16.0,2018
+Syangja,Syangja,871.0,27.3,15.0,2018
+Bandipur,Tanahu,991.0,26.7,14.0,2018
+Gorkha Birenchowk ,Gorkha,724.0,27.7,17.0,2018
+Chapakot,Syangja,617.0,29.5,17.0,2018
+Malepatan Pokhara ,Kaski,859.0,27.4,14.0,2018
+Lumle,Kaski,1738.0,20.1,12.0,2018
+Khairini Tar,Tanahun,515.0,29.6,17.0,2018
+Dandaswara,Syangja,1316.0,23.6,15.0,2018
+Ghalekharka,Kaski,1665.0,20.9,12.0,2018
+Begnas,Kaski,682.0,28.6,16.0,2018
+Bhorletar,Lamjung,469.0,30.1,17.0,2018
+Panchase,Parbat,2492.0,17.5,8.1,2018
+Humde,Manang,3401.0,13.8,-1.8,2018
+Rampur,Chitwan,189.0,30.6,18.0,2018
+Daman,Makwanpur,2265.0,18.6,8.2,2018
+Hetauda N F I ,Makwanpur,452.0,29.2,17.0,2018
+Simara Airport,Bara,137.0,30.7,18.0,2018
+Parwanipur,Bara,87.0,30.2,19.0,2018
+Bharatpur,Chitwan,216.0,31.1,19.0,2018
+Kakani,Nuwakot,2002.0,20.4,11.0,2018
+Khumaltar,Lalitpur,1334.0,24.9,12.0,2018
+Kathmandu Airport,,1337.0,25.6,13.0,2018
+Dhunibesi,Dhading,991.0,27.6,16.0,2018
+Panipokhari Kathmandu ,Kathmandu,1329.0,27.6,13.0,2018
+Bhaktapur,Bhaktapur,1315.0,26.5,12.0,2018
+Dhunche,Rasuwa,2005.0,20.5,10.0,2018
+Khokana,Lalitpur,1309.0,25.2,11.0,2018
+Charikot,Dolakha,2132.0,23.0,9.8,2018
+Jiri,Dolakha,1877.0,20.9,8.4,2018
+Sindhuli Madhi,Sindhuli,556.0,29.3,17.0,2018
+Janakpur Airport,Dhanusha,76.0,30.9,19.0,2018
+Hardinath,Dhanusha,93.0,30.0,19.0,2018
+Manusmara,Sarlahi,90.0,30.2,19.0,2018
+Karmaiya,Sarlahi,139.0,31.5,20.0,2018
+Jalesor,Mahottari,68.0,30.5,20.0,2018
+Manthali,Ramechhap,497.0,30.8,17.0,2018
+Kabre,Dolakha,1755.0,22.8,12.0,2018
+Phattepur,Saptari,101.0,31.4,19.0,2018
+Udayapur Gadhi,,469.0,29.7,18.0,2018
+Lahan,Siraha,110.0,30.4,19.0,2018
+Siraha,,63.0,31.3,12.0,2018
+Diktel,Khotang,1612.0,22.3,14.0,2018
+Chainpur East ,Sankhuwasabha,1277.0,24.8,14.0,2018
+Pakhribas,Dhankuta,1720.0,21.1,12.0,2018
+Dhankuta,Dhankuta,1192.0,25.1,15.0,2018
+Dharan Bazar,sunsari,310.0,29.9,20.0,2018
+Biratnagar Airport,Morang,72.0,30.1,19.0,2018
+Tarahara,Sunsari,120.0,30.6,18.0,2018
+Taplejung,Taplejung,1744.0,22.2,12.0,2018
+Ilam Tea Estate,Ilam,1208.0,24.4,12.0,2018
+Damak,Jhapa,119.0,30.7,19.0,2018
+Kanyam Tea Estate,Ilam,1570.0,20.8,13.0,2018
+Phidim Panchther ,Panchthar,1157.0,26.5,12.0,2018
+Gaida Kankai ,Jhapa,107.0,30.7,17.0,2018
+Nuwakot,Nuwakot,966.0,27.7,16.0,2018
+Chisapani Karnali ,Kailali,201.0,29.8,19.0,2018
+Jyamirebari,,1525.0,22.0,12.0,2018
+Okhaldhunga,,1725.0,22.7,12.0,2018
+Baitadi Gothalapani ,Baitadi,1352.0,28.2,11.4,2019
+Patan West ,Baitadi,1292.0,25.5,13.4,2019
+Dadeldhura,Dadeldhura,1879.0,21.2,11.5,2019
+Mahendra Nagar,Kanchanpur,197.0,30.6,18.5,2019
+Dainsili Sidhhapur ,Baitadi,2083.0,21.4,13.9,2019
+Darchula New,Darchula,887.0,28.1,15.1,2019
+Patan new,Baitadi,1299.0,24.5,13.3,2019
+Silgadhi Doti,Doti,1309.0,25.8,14.1,2019
+Bajura Martadi ,Bajura,1598.0,23.7,11.8,2019
+Tikapur,Kailali,149.0,31.2,16.2,2019
+Dhangadhi Attariya ,Kailali,184.0,31.4,18.2,2019
+Godavari West ,Kailali,280.0,31.2,20.2,2019
+Mangalsen,Achham,1310.0,25.5,13.4,2019
+Dipayal Doti ,Doti,563.0,30.8,15.9,2019
+Oli Gaun Patkani ,Achham,989.0,29.3,13.5,2019
+Jumla,Jumla,2363.0,20.4,6.1,2019
+Gam Shree Nagar,Mugu,2113.0,21.7,10.4,2019
+Rara,Mugu,2989.0,15.1,3.2,2019
+Nagma,Kalikot,2017.0,21.6,8.4,2019
+Dipal Gaun,Jumla,2422.0,21.7,5.4,2019
+Simikot,Humla,2993.0,15.0,4.8,2019
+Dunai,Dolpa,2098.0,21.5,8.3,2019
+Kaigaun,Dolpa,2683.0,20.1,4.5,2019
+Jumla Airport,Jumla,2384.0,20.1,4.7,2019
+Pusma Camp,Surkhet,953.0,25.2,13.4,2019
+Dailekh,Dailekh,1394.0,25.2,14.5,2019
+"Surkhet Airport, Birendranagar ",Surkhet,683.0,29.0,16.1,2019
+Gulariya,Bardiya,126.0,30.6,18.5,2019
+Khajura Nepalganj ,Banke,129.0,30.8,18.7,2019
+Nepalgunj Reg Off ,Banke,141.0,30.2,19.9,2019
+Sikta,Banke,161.0,31.0,18.5,2019
+Mehalkuna,Surkhet,464.0,29.7,16.0,2019
+Libang Gaun,Rolpa,1314.0,26.6,13.3,2019
+Bijuwar Tar,Pyuthan,835.0,29.4,15.5,2019
+Salyan Bazar,Salyan,1557.0,24.7,13.8,2019
+Chaurjhari Tar,Rukum,863.0,28.0,14.3,2019
+Musikot Rukumkot ,Rukum,1412.0,24.8,13.5,2019
+Ghorai Dang ,Dang,663.0,28.8,17.0,2019
+Jomsom,Mustang,0.0,17.6,4.6,2019
+Thakmarpha,Mustang,2655.0,17.0,5.0,2019
+Baglung,Baglung,964.0,27.6,15.3,2019
+Kushma,Parbat,900.0,28.4,15.4,2019
+Tansen,Palpa,1183.0,25.4,13.5,2019
+Bhairahawa Airport,Rupandehi,108.0,31.0,19.8,2019
+Bhairahawa Agric ,Rupandehi,112.0,31.7,19.3,2019
+Parasi,Nawalparasi,112.0,31.1,18.4,2019
+Khanchikot,Arghakhachi,1801.0,21.0,12.7,2019
+Taulihawa,Kapilvastu,106.0,30.4,19.0,2019
+Semari,Nawalparasi,110.0,31.9,18.1,2019
+Anp Chour,,738.0,30.4,13.7,2019
+Sandhikharka,Arghakhachi,1030.0,26.7,13.7,2019
+Pokhara Airport,Kaski,803.9,27.3,16.3,2019
+Syangja,Syangja,871.0,27.3,15.5,2019
+Bandipur,Tanahu,991.0,26.0,14.3,2019
+Gorkha Birenchowk ,Gorkha,724.0,27.3,16.9,2019
+Chapakot,Syangja,617.0,29.2,16.8,2019
+Malepatan Pokhara ,Kaski,859.0,27.3,13.7,2019
+Lumle,Kaski,1738.0,20.3,11.7,2019
+Khairini Tar,Tanahun,515.0,29.2,17.4,2019
+Dandaswara,Syangja,1316.0,23.6,14.3,2019
+Ghalekharka,Kaski,1665.0,21.3,12.5,2019
+Begnas,Kaski,682.0,28.5,16.2,2019
+Panchase,Parbat,2492.0,18.0,8.2,2019
+Daman,Makwanpur,2265.0,18.4,7.5,2019
+Hetauda N F I ,Makwanpur,452.0,29.3,17.6,2019
+Gaur,Rautahat,77.0,31.9,20.2,2019
+Bharatpur,Chitwan,216.0,31.4,19.5,2019
+Chautara,Sindhupalchok,1552.0,25.0,12.3,2019
+Dhulikhel,Kavre,1543.0,23.8,12.3,2019
+Khumaltar,Lalitpur,1334.0,24.7,12.8,2019
+Kathmandu Airport,,1337.0,25.6,13.1,2019
+Panchkhal,Kavre,857.0,28.7,14.6,2019
+Dhunibesi,Dhading,991.0,26.9,16.0,2019
+Panipokhari Kathmandu ,Kathmandu,1329.0,25.9,13.7,2019
+Bhaktapur,Bhaktapur,1315.0,26.3,12.4,2019
+Dhunche,Rasuwa,2005.0,20.2,10.6,2019
+Pansayakhola,Nuwakot,1982.0,19.4,11.9,2019
+Changu Narayan,Bhaktapur,1502.0,25.2,13.5,2019
+Khokana,Lalitpur,1309.0,24.9,11.6,2019
+Charikot,Dolakha,2132.0,23.2,10.0,2019
+Jiri,Dolakha,1877.0,21.0,8.5,2019
+Sindhuli Madhi,Sindhuli,556.0,29.4,17.1,2019
+Hardinath,Dhanusha,93.0,30.4,19.9,2019
+Manusmara,Sarlahi,90.0,30.4,19.0,2019
+Karmaiya,Sarlahi,139.0,31.5,20.2,2019
+Manthali,Ramechhap,497.0,30.7,17.1,2019
+Kabre,Dolakha,1755.0,23.0,12.0,2019
+Phattepur,Saptari,101.0,31.2,19.1,2019
+Udayapur Gadhi,,469.0,29.5,19.0,2019
+Lahan,Siraha,110.0,30.5,19.8,2019
+Salleri,,2383.0,18.8,8.6,2019
+Diktel,Khotang,1612.0,22.5,13.8,2019
+Rajbiraj,Saptari,68.0,30.3,20.5,2019
+Num,Sankhuwasabha,1494.0,22.6,12.8,2019
+Pakhribas,Dhankuta,1720.0,21.0,12.7,2019
+Dhankuta,Dhankuta,1192.0,25.5,15.4,2019
+Dharan Bazar,sunsari,310.0,29.9,20.6,2019
+Terhathum,,1525.0,23.6,13.5,2019
+Chatara,Sunsari,105.0,31.2,19.4,2019
+Biratnagar Airport,Morang,72.0,30.8,19.4,2019
+Tarahara,Sunsari,120.0,29.8,18.7,2019
+Khadbari,Sankhuwasabha,1064.0,25.7,16.5,2019
+Taplejung,Taplejung,1744.0,21.9,12.4,2019
+Ilam Tea Estate,Ilam,1208.0,23.5,13.9,2019
+Damak,Jhapa,119.0,30.8,17.0,2019
+Chandra Gadhi,Jhapa,90.0,31.0,21.2,2019
+Kanyam Tea Estate,Ilam,1570.0,20.7,12.9,2019
+Gaida Kankai ,Jhapa,107.0,30.9,19.0,2019
+Kechana,Jhapa,71.0,30.1,19.1,2019
+Nuwakot,Nuwakot,966.0,27.4,16.3,2019
+Chisapani Karnali ,Kailali,201.0,30.2,19.9,2019
+Jyamirebari,,1525.0,22.5,12.4,2019
+Lete,Mustang,2617.0,17.0,6.0,2019
+Okhaldhunga,,1725.0,22.5,12.6,2019
+Dailekh,Dailekh,1394.0,24.7,14.0,2020
+Libang Gaun,Rolpa,1314.0,26.1,12.0,2020
+Bijuwar Tar,Pyuthan,835.0,28.6,16.0,2020
+Salyan Bazar,Salyan,1557.0,24.6,14.0,2020
+Ghalekharka,Kaski,1665.0,20.9,12.0,2020
+Chautara,Sindhupalchok,1552.0,25.1,13.0,2020
+Chisapani Karnali ,Kailali,201.0,29.1,19.0,2020
+Dailekh,Dailekh,1394.0,24.7,15.0,2021
+Libang Gaun,Rolpa,1314.0,26.4,13.0,2021
+Bijuwar Tar,Pyuthan,835.0,28.4,16.0,2021
+Ghalekharka,Kaski,1665.0,21.4,13.0,2021
+Chautara,Sindhupalchok,1552.0,25.0,13.0,2021
+Chisapani Karnali ,Kailali,201.0,29.9,20.0,2021
+Jyamirebari,,1525.0,22.3,13.0,2021
+Dailekh,Dailekh,1394.0,24.3,14.6,2022
+Mehalkuna,Surkhet,464.0,30.5,17.1,2022
+Libang Gaun,Rolpa,1314.0,26.4,13.3,2022
+Bijuwar Tar,Pyuthan,835.0,29.4,16.1,2022
+Salyan Bazar,Salyan,1557.0,20.5,14.1,2022
+Ghalekharka,Kaski,1665.0,21.6,12.7,2022
+Rampur,Chitwan,189.0,30.5,18.6,2022
+Daman,Makwanpur,2265.0,19.0,9.2,2022
+Simara Airport,Bara,137.0,30.3,19.6,2022
+Parwanipur,Bara,87.0,30.4,19.4,2022
+Birganj,Parsa,67.0,31.5,20.7,2022
+Kalaiya,Bara,100.0,30.4,20.4,2022
+Gaur,Rautahat,77.0,31.5,18.5,2022
+Bharatpur,Chitwan,216.0,30.8,19.9,2022
+Kakani,Nuwakot,2002.0,19.3,11.5,2022
+Chautara,Sindhupalchok,1552.0,25.6,13.5,2022
+Sarmathang,Sindhupalchok,2574.0,17.0,8.1,2022
+Dhulikhel,Kavre,1543.0,24.1,12.8,2022
+Khumaltar,Lalitpur,1334.0,25.2,13.4,2022
+Kathmandu Airport,,1337.0,25.6,14.0,2022
+Panchkhal,Kavre,857.0,28.9,15.3,2022
+Panipokhari Kathmandu ,Kathmandu,1329.0,26.3,14.4,2022
+Bhaktapur,Bhaktapur,1315.0,26.9,13.0,2022
+Dhunche,Rasuwa,2005.0,20.0,10.8,2022
+Changu Narayan,Bhaktapur,1502.0,25.9,13.7,2022
+Khokana,Lalitpur,1309.0,25.9,12.0,2022
+Charikot,Dolakha,2132.0,22.5,10.3,2022
+Jiri,Dolakha,1877.0,21.0,9.3,2022
+Sindhuli Madhi,Sindhuli,556.0,29.1,17.2,2022
+Janakpur Airport,Dhanusha,76.0,30.8,20.1,2022
+Hardinath,Dhanusha,93.0,30.1,20.2,2022
+Manusmara,Sarlahi,90.0,30.1,19.9,2022
+Karmaiya,Sarlahi,139.0,30.9,20.5,2022
+Jalesor,Mahottari,68.0,31.1,20.6,2022
+Manthali,Ramechhap,497.0,30.8,17.3,2022
+Kabre,Dolakha,1755.0,23.9,12.0,2022
+Phattepur,Saptari,101.0,30.3,19.4,2022
+Udayapur Gadhi,,469.0,29.5,18.8,2022
+Lahan,Siraha,110.0,30.9,20.1,2022
+Siraha,,63.0,31.2,20.5,2022
+Diktel,Khotang,1612.0,22.1,14.1,2022
+Rajbiraj,Saptari,68.0,30.5,20.3,2022
+Num,Sankhuwasabha,1494.0,22.7,13.3,2022
+Nuwakot,Nuwakot,966.0,27.2,16.6,2022
+Chisapani Karnali ,Kailali,201.0,29.9,20.2,2022
+Okhaldhunga,,1725.0,22.3,13.3,2022

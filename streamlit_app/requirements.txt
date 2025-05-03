@@ -1,0 +1,13 @@
+
+## `requirements.txt`
+
+# This file is used to install the required packages for the Streamlit app.
+streamlit
+pandas
+matplotlib
+seaborn
+geopandas
+rasterio
+scikit-learn
+wordcloud
+nltk
