@@ -1,75 +1,89 @@
-# utils/climate_agri_corr.py
+# streamlit_app/utils/climate_agri_corr.py
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-from scipy.stats import pearsonr
-from sklearn.linear_model import LinearRegression
-import numpy as np
 
-def merge_climate_agriculture(df_climate, df_agri, climate_col, crop_col):
+def merge_climate_agriculture(df_climate: pd.DataFrame,
+                              df_agri: pd.DataFrame,
+                              climate_var: str,
+                              crop: str) -> pd.DataFrame:
     """
-    Merges annual climate averages and crop yields by year.
+    Merge annual aggregated climate variable with agricultural crop yield by year.
+
+    Parameters
+    ----------
+    df_climate : pd.DataFrame
+        Daily climate data with 'Date', 'Temp_2m', 'Precipitation', etc.
+    df_agri : pd.DataFrame
+        Agricultural data with columns ['Year', <crop1>, <crop2>, ...].
+    climate_var : str
+        Which climate variable to use: 'Temp_2m' or 'Precipitation'.
+    crop : str
+        Name of one crop column in df_agri.
+
+    Returns
+    -------
+    pd.DataFrame
+        ['Year', 'Climate_Value', 'Crop_Yield'] merged on Year.
     """
-    try:
-        # Prepare climate data (yearly average)
-        df_climate['Year'] = df_climate['Date'].dt.year
-        df_climate_yearly = df_climate.groupby('Year')[climate_col].mean().reset_index()
+    df = df_climate.copy()
+    df['Year'] = df['Date'].dt.year
 
-        # Prepare agriculture data (already has Year column)
-        df_agri_sel = df_agri[['Year', crop_col]].copy()
-        df_agri_sel.rename(columns={crop_col: "Crop_Yield"}, inplace=True)
+    # Aggregate climate by year
+    if climate_var == 'Temp_2m':
+        climate_agg = df.groupby('Year')['Temp_2m'] \
+                      .mean().reset_index(name='Climate_Value')
+    elif climate_var == 'Precipitation':
+        climate_agg = df.groupby('Year')['Precipitation'] \
+                      .sum().reset_index(name='Climate_Value')
+    else:
+        raise ValueError("climate_var must be 'Temp_2m' or 'Precipitation'")
 
-        # Merge on Year
-        df_merged = pd.merge(df_climate_yearly, df_agri_sel, on='Year', how='inner')
+    # Check agri
+    if 'Year' not in df_agri.columns or crop not in df_agri.columns:
+        raise ValueError("df_agri must contain 'Year' and the specified crop column")
 
-        return df_merged
-    except Exception as e:
-        st.error(f"Error merging data: {e}")
-        return pd.DataFrame()
+    agri_subset = df_agri[['Year', crop]].rename(columns={crop: 'Crop_Yield'})
 
-def plot_climate_crop_correlation(df_merged, climate_col, crop_col):
+    # Merge
+    merged = pd.merge(climate_agg, agri_subset, on='Year', how='inner')
+    return merged
+
+def plot_climate_crop_correlation(df_merged: pd.DataFrame, climate_var_label: str):
     """
-    Scatter plot with regression line showing crop vs. climate variable.
+    Scatter + regression of Climate_Value vs Crop_Yield.
+
+    Parameters
+    ----------
+    df_merged : pd.DataFrame
+        Output of merge_climate_agriculture.
+    climate_var_label : str
+        Friendly label for the climate variable (e.g. "Temperature (°C)").
     """
-    if df_merged.empty:
-        st.warning("No data to plot.")
-        return
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.regplot(
-        data=df_merged,
-        x=climate_col,
-        y="Crop_Yield",
-        ax=ax,
-        scatter_kws={"s": 60, "alpha": 0.8},
-        line_kws={"color": "red"}
-    )
-
-    ax.set_title(f"📈 {crop_col} vs. {climate_col}")
-    ax.set_xlabel(f"{climate_col}")
-    ax.set_ylabel("Crop Yield (in 000 MT)")
-    ax.grid(True)
-
+    st.subheader(f"🌿 {climate_var_label} vs Crop Yield")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.regplot(data=df_merged, x='Climate_Value', y='Crop_Yield', ax=ax)
+    ax.set_xlabel(climate_var_label)
+    ax.set_ylabel("Crop Yield")
+    ax.set_title(f"{climate_var_label} vs Crop Yield")
     st.pyplot(fig)
-    st.caption("Sources: Climate – Open Data Nepal; Crop Yields – Ministry of Agriculture")
 
-
-def calculate_correlation(df_merged, climate_col):
+def calculate_correlation(df_merged: pd.DataFrame) -> float:
     """
-    Calculate and display Pearson correlation between climate variable and crop yield.
-    """
-    try:
-        r, p = pearsonr(df_merged[climate_col], df_merged["Crop_Yield"])
-        st.markdown(f"### Correlation Coefficient: **r = {r:.3f}**")
-        if abs(r) >= 0.7:
-            st.success("Strong correlation")
-        elif abs(r) >= 0.4:
-            st.info("Moderate correlation")
-        else:
-            st.warning("Weak or no linear correlation")
+    Compute Pearson correlation between Climate_Value and Crop_Yield.
 
-        st.markdown(f"**p-value = {p:.4f}** — {'statistically significant' if p < 0.05 else 'not significant'}")
-    except Exception as e:
-        st.error(f"❌ Error calculating correlation: {e}")
+    Parameters
+    ----------
+    df_merged : pd.DataFrame
+        Output of merge_climate_agriculture.
+
+    Returns
+    -------
+    float
+        Pearson r (or None if insufficient data).
+    """
+    if df_merged.shape[0] < 2:
+        return None
+    return df_merged['Climate_Value'].corr(df_merged['Crop_Yield'])
