@@ -70,7 +70,8 @@ def ensure_glacier_shapefile():
     ]
     if not all(os.path.isfile(os.path.join(glacier_dir, f)) for f in required_files):
         st.warning("🧊 Glacier shapefile incomplete or missing. Attempting to download...")
-        zip_file_id = "1NmzwIB5PE-GbViBu189mPu6jGGgumiza"  # ✅ New glacier ZIP ID
+        zip_file_id = "1_9PlywFpKIvehoJJNqGS392XRdN5QMit"
+  # ✅ New glacier ZIP ID
         download_and_unzip_from_drive(zip_file_id, glacier_dir)
     else:
         st.success("✅ Glacier shapefile found.")
