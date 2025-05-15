@@ -3,8 +3,6 @@ import streamlit as st
 from utils.preprocess import load_data, clean_data
 from utils.download_data import download_all_data
 
-st.cache_data.clear() 
-
 # ─── Initial Setup ────────────────────────────────────────────────────
 download_all_data()
 
@@ -71,18 +69,25 @@ elif dashboard == "Climate":
         plot_forecast(df_forecast, df_yearly, variable_label=label)
         st.markdown(f"**Predicted in {forecast_year}:** {df_forecast.loc[df_forecast['Year']==forecast_year, 'Predicted'].iloc[0]:.2f} {label}")
 
-# ─── Environment ──────────────────────────────────────────────────────
 elif dashboard == "Environment":
-    from utils.biodiversity import load_threatened_data, plot_threatened_trend
-    from utils.landcover import load_raster_resampled, compute_landcover_change, plot_landcover_change
-    from utils.glacier import load_glacier_shapefile, extract_glacier_area_by_year, plot_glacier_retreat
-    from utils.glacier_weather_corr import summarize_extremes, merge_glacier_weather, plot_weather_vs_glacier
-    from utils.nlp_tools import load_sample_texts, analyze_sentiment, extract_keywords, plot_wordcloud
-    from utils.download_data import download_from_drive
+    try:
+        from utils.biodiversity import load_threatened_data, plot_threatened_trend
+        from utils.landcover import (
+            load_raster_resampled,
+            compute_landcover_transition_matrix,
+            plot_landcover_transition_matrix
+        )
+        from utils.glacier import load_glacier_shapefile, extract_glacier_area_by_year, plot_glacier_retreat
+        from utils.glacier_weather_corr import summarize_extremes, merge_glacier_weather, plot_weather_vs_glacier
+        from utils.nlp_tools import load_sample_texts, analyze_sentiment, extract_keywords, plot_wordcloud
+        from utils.download_data import download_from_drive
 
-    page = st.sidebar.selectbox("Environment Dashboard", [
-        "Biodiversity Trends", "Landcover Change", "Climate News Trends", "Glacier Retreat", "Extreme Weather vs Glacier Loss"
-    ])
+        page = st.sidebar.selectbox("Environment Dashboard", [
+            "Biodiversity Trends", "Landcover Change", "Climate News Trends", "Glacier Retreat", "Extreme Weather vs Glacier Loss"
+        ])
+    except Exception as e:
+        st.error(f"❌ Failed to load environment dashboard: {e}")
+        page = None  # fallback
 
     if page == "Biodiversity Trends":
         st.subheader("🦋 Threatened Species Trends")
@@ -98,15 +103,7 @@ elif dashboard == "Environment":
 
     elif page == "Landcover Change":
         st.subheader("🗺️ Landcover Change (2005 → 2015)")
-
-        from utils.landcover import (
-            load_raster_resampled,
-            compute_landcover_transition_matrix,
-            plot_landcover_transition_matrix
-        )
-
         lc1, _ = load_raster_resampled("Data/Raw/Environment_data/Landcover_2005_Icimod.tif", scale_factor=10)
-
         if lc1 is not None:
             lc2, _ = load_raster_resampled(
                 "Data/Raw/Environment_data/Landcover_2015_icimod.tif",
@@ -114,7 +111,6 @@ elif dashboard == "Environment":
             )
         else:
             lc2 = None
-
         if lc1 is not None and lc2 is not None:
             df_trans = compute_landcover_transition_matrix(lc1, lc2)
             plot_landcover_transition_matrix(df_trans)
