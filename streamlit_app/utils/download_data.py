@@ -48,7 +48,8 @@ def download_and_unzip_from_drive(file_id, extract_to):
     """
     Download and extract a ZIP from Google Drive, flattening all contents.
     """
-    zip_path = "temp_glacier_data.zip"
+    zip_path = "glacier_data_download.zip" 
+
     download_from_drive(file_id, zip_path, verbose=True)
 
     if not zipfile.is_zipfile(zip_path):
