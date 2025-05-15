@@ -1,27 +1,23 @@
 import os
 import streamlit as st
-import geopandas as gpd
 from utils.preprocess import load_data, clean_data
 from utils.download_data import download_all_data
 
-
-# Run downloader to ensure large files are present
+# ─── Initial Setup ────────────────────────────────────────────────────
 download_all_data()
 
-# Climate CSV from Drive fallback
 csv_path = "Data/Raw/Weather&Climate_data/dailyclimate_OpenDataNpl.csv"
 gdrive_file_id = "1WlyTmR7PNXsOsxcdBDfvYrugn3tfyT5f"
 df_raw = load_data(csv_path, gdrive_file_id)
 df_clean = clean_data(df_raw)
 
-# Cache cleaned data
 os.makedirs("processed", exist_ok=True)
 df_clean.to_csv("processed/cleaned_dailyclimate.csv", index=False)
 
-# ─── Dashboard structure ──────────────────────────────────────────────
+# ─── Dashboard Selection ──────────────────────────────────────────────
 dashboard = st.sidebar.radio("Choose Dashboard", ["Home", "Climate", "Environment", "Socio-Economic"])
 
-# ─── Home Page ───────────────────────────────────────────────────────
+# ─── Home ─────────────────────────────────────────────────────────────
 if dashboard == "Home":
     st.title("Climate Change Impact Assessment System for Nepal")
     st.success("✅ Data loaded successfully!")
@@ -36,7 +32,7 @@ if dashboard == "Home":
     - 🗞️ NLP from climate reports  
     """)
 
-# ─── Climate Dashboard ────────────────────────────────────────────────
+# ─── Climate ──────────────────────────────────────────────────────────
 elif dashboard == "Climate":
     from utils.eda_plot import (
         plot_temperature_trend, plot_precipitation_distribution, plot_extreme_event_trends
@@ -73,65 +69,55 @@ elif dashboard == "Climate":
         plot_forecast(df_forecast, df_yearly, variable_label=label)
         st.markdown(f"**Predicted in {forecast_year}:** {df_forecast.loc[df_forecast['Year']==forecast_year, 'Predicted'].iloc[0]:.2f} {label}")
 
-# ─── Environment Dashboard ───────────────────────────────────────────
+# ─── Environment ──────────────────────────────────────────────────────
 elif dashboard == "Environment":
     from utils.biodiversity import load_threatened_data, plot_threatened_trend
     from utils.landcover import load_raster_resampled, compute_landcover_change, plot_landcover_change
     from utils.glacier import load_glacier_shapefile, extract_glacier_area_by_year, plot_glacier_retreat
     from utils.glacier_weather_corr import summarize_extremes, merge_glacier_weather, plot_weather_vs_glacier
     from utils.nlp_tools import load_sample_texts, analyze_sentiment, extract_keywords, plot_wordcloud
+    from utils.download_data import download_from_drive
 
     page = st.sidebar.selectbox("Environment Dashboard", [
         "Biodiversity Trends", "Landcover Change", "Climate News Trends", "Glacier Retreat", "Extreme Weather vs Glacier Loss"
     ])
 
-if page == "Biodiversity Trends":
-    st.subheader("🦋 Threatened Species Trends")
+    if page == "Biodiversity Trends":
+        st.subheader("🦋 Threatened Species Trends")
+        drive_id = "1nulzINJWa03itJJuYgZ-zb_ip9lKhTay"
+        local_path = "Data/processed/threatened_species_cleaned.csv"
+        download_from_drive(drive_id, local_path)
+        df_bio = load_threatened_data(local_path)
+        if not df_bio.empty:
+            st.dataframe(df_bio.head())
+            species = st.multiselect("Select species:", df_bio['Species'].unique(), default=df_bio['Species'].unique()[:3])
+            if species:
+                plot_threatened_trend(df_bio, species)
 
-    from utils.download_data import download_from_drive
-
-    # Download threatened species CSV from Google Drive
-    drive_id = "1nulzINJWa03itJJuYgZ-zb_ip9lKhTay"
-    local_path = "Data/processed/threatened_species_cleaned.csv"
-    download_from_drive(drive_id, local_path)
-
-    # Load and visualize
-    df_bio = load_threatened_data(local_path)
-    if not df_bio.empty:
-        st.dataframe(df_bio.head())
-
-        species = st.multiselect(
-            "Select species:",
-            df_bio['Species'].unique(),
-            default=df_bio['Species'].unique()[:3]
-        )
-
-        if species:
-            plot_threatened_trend(df_bio, species)
-
-    
     elif page == "Landcover Change":
         st.subheader("🗺️ Landcover Change (2005 → 2015)")
 
-        # load the 2005 raster and get its shape
+        from utils.landcover import (
+            load_raster_resampled,
+            compute_landcover_transition_matrix,
+            plot_landcover_transition_matrix
+        )
+
         lc1, _ = load_raster_resampled("Data/Raw/Environment_data/Landcover_2005_Icimod.tif", scale_factor=10)
+
         if lc1 is not None:
             lc2, _ = load_raster_resampled(
                 "Data/Raw/Environment_data/Landcover_2015_icimod.tif",
-                target_shape=lc1.shape  # Match shape of 2005 raster
+                target_shape=lc1.shape
             )
         else:
             lc2 = None
 
         if lc1 is not None and lc2 is not None:
-            if lc1.shape == lc2.shape:
-                delta = compute_landcover_change(lc1, lc2)
-                plot_landcover_change(delta)
-            else:
-                st.error("❌ Resampled rasters do not match in shape.")
+            df_trans = compute_landcover_transition_matrix(lc1, lc2)
+            plot_landcover_transition_matrix(df_trans)
         else:
             st.error("❌ Could not load one or both raster files.")
-
 
     elif page == "Climate News Trends":
         st.subheader("🗞️ NLP on Climate Reports")
@@ -142,13 +128,16 @@ if page == "Biodiversity Trends":
 
     elif page == "Glacier Retreat":
         st.subheader("🧊 Glacier Retreat")
-        shp_path = "Data/Raw/Environment_data/Glacier_data/Glacier_1980_1990_2000_2010.shp"
-        gdf = gpd.read_file("Data/Raw/Environment_data/Glacier_data/Glacier_1980_1990_2000_2010.shp")
-
-        if not gdf.empty:
-            area_df = extract_glacier_area_by_year(gdf)
-            st.dataframe(area_df)
-            plot_glacier_retreat(area_df)
+        try:
+            import geopandas as gpd
+            shp_path = "Data/Raw/Environment_data/Glacier_data/Glacier_1980_1990_2000_2010.shp"
+            gdf = gpd.read_file(shp_path)
+            if not gdf.empty:
+                area_df = extract_glacier_area_by_year(gdf)
+                st.dataframe(area_df)
+                plot_glacier_retreat(area_df)
+        except Exception as e:
+            st.error(f"❌ Could not load glacier shapefile: {e}")
 
     elif page == "Extreme Weather vs Glacier Loss":
         st.subheader("🌡️ Extreme Weather vs Glacier Loss")
@@ -162,7 +151,7 @@ if page == "Biodiversity Trends":
                 st.dataframe(merged_df)
                 plot_weather_vs_glacier(merged_df)
 
-# ─── Socio-Economic Dashboard ─────────────────────────────────────────
+# ─── Socio-Economic ───────────────────────────────────────────────────
 elif dashboard == "Socio-Economic":
     from utils.agriculture import (
         load_agriculture_data, plot_crop_trends, prepare_crop_data, train_crop_model, plot_crop_forecast
@@ -193,25 +182,15 @@ elif dashboard == "Socio-Economic":
     elif page == "Climate Agriculture Correlation":
         st.subheader("🌿 Climate–Agriculture Correlation")
         df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
-
-        # Select options
         climate_var = st.selectbox("Climate Variable:", ["Temp_2m", "Precip"])
         crop = st.selectbox("Select crop:", df_agri.columns[1:])
-
-        # Merge and preview data
         merged_df = merge_climate_agriculture(df_clean, df_agri, climate_var, crop)
         st.dataframe(merged_df.head())
 
-        # Generate user-friendly label
-        label_map = {
-            "Temp_2m": "Temperature (°C)",
-            "Precip": "Precipitation (mm)"
-        }
+        label_map = {"Temp_2m": "Temperature (°C)", "Precip": "Precipitation (mm)"}
         climate_label = label_map.get(climate_var, climate_var)
-
-        # Plot and correlation
         plot_climate_crop_correlation(merged_df, climate_label)
+
         corr = calculate_correlation(merged_df)
         if corr is not None:
             st.markdown(f"**Pearson r:** {corr:.2f}")
-
