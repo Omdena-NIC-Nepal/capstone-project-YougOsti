@@ -3,6 +3,8 @@ import streamlit as st
 from utils.preprocess import load_data, clean_data
 from utils.download_data import download_all_data
 
+st.cache_data.clear() 
+
 # ─── Initial Setup ────────────────────────────────────────────────────
 download_all_data()
 
