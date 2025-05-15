@@ -13,7 +13,7 @@ def load_threatened_data(filepath):
         df = pd.read_csv(filepath)
 
         # Debug: show columns during development
-        st.write("🔍 Columns in CSV:", df.columns.tolist())
+        ## st.write("🔍 Columns in CSV:", df.columns.tolist())
 
         # Rename species column if necessary
         if "Major Group of Species" in df.columns:
