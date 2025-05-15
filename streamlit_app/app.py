@@ -69,6 +69,7 @@ elif dashboard == "Climate":
         plot_forecast(df_forecast, df_yearly, variable_label=label)
         st.markdown(f"**Predicted in {forecast_year}:** {df_forecast.loc[df_forecast['Year']==forecast_year, 'Predicted'].iloc[0]:.2f} {label}")
 
+# ─── Environment ──────────────────────────────────────────────────────
 elif dashboard == "Environment":
     try:
         from utils.biodiversity import load_threatened_data, plot_threatened_trend
@@ -126,34 +127,36 @@ elif dashboard == "Environment":
 
     elif page == "Glacier Retreat":
         st.subheader("🧊 Glacier Retreat")
-    try:
-        shp_dir = "Data/Raw/Environment_data/Glacier_data"
-        # Dynamically find the .shp file (in case name changes or varies)
-        shp_files = [f for f in os.listdir(shp_dir) if f.endswith(".shp")]
-        if not shp_files:
-            st.error("❌ No shapefile (.shp) found in Glacier_data folder.")
-        else:
-            shp_path = os.path.join(shp_dir, shp_files[0])
-            gdf = load_glacier_shapefile(shp_path)
-            if not gdf.empty:
-                area_df = extract_glacier_area_by_year(gdf)
-                st.dataframe(area_df)
-                plot_glacier_retreat(area_df)
-    except Exception as e:
-        st.error(f"❌ Could not load glacier shapefile: {e}")
-
+        try:
+            shp_dir = "Data/Raw/Environment_data/Glacier_data"
+            # Dynamically find the .shp file (in case name changes or varies)
+            shp_files = [f for f in os.listdir(shp_dir) if f.endswith(".shp")]
+            if not shp_files:
+                st.error("❌ No shapefile (.shp) found in Glacier_data folder.")
+            else:
+                shp_path = os.path.join(shp_dir, shp_files[0])
+                gdf = load_glacier_shapefile(shp_path)
+                if not gdf.empty:
+                    area_df = extract_glacier_area_by_year(gdf)
+                    st.dataframe(area_df)
+                    plot_glacier_retreat(area_df)
+        except Exception as e:
+            st.error(f"❌ Could not load glacier shapefile: {e}")
 
     elif page == "Extreme Weather vs Glacier Loss":
         st.subheader("🌡️ Extreme Weather vs Glacier Loss")
-        shp_path = "Data/Raw/Environment_data/Glacier_data/Glacier_1980_1990_2000_2010.shp"
-        gdf = load_glacier_shapefile(shp_path)
-        if not gdf.empty:
-            glacier_df = extract_glacier_area_by_year(gdf)
-            climate_summary = summarize_extremes(df_clean)
-            merged_df = merge_glacier_weather(glacier_df, climate_summary)
-            if not merged_df.empty:
-                st.dataframe(merged_df)
-                plot_weather_vs_glacier(merged_df)
+        try:
+            shp_path = "Data/Raw/Environment_data/Glacier_data/Glacier_1980_1990_2000_2010.shp"
+            gdf = load_glacier_shapefile(shp_path)
+            if not gdf.empty:
+                glacier_df = extract_glacier_area_by_year(gdf)
+                climate_summary = summarize_extremes(df_clean)
+                merged_df = merge_glacier_weather(glacier_df, climate_summary)
+                if not merged_df.empty:
+                    st.dataframe(merged_df)
+                    plot_weather_vs_glacier(merged_df)
+        except Exception as e:
+            st.error(f"❌ Could not process Extreme Weather vs Glacier Loss: {e}")
 
 # ─── Socio-Economic ───────────────────────────────────────────────────
 elif dashboard == "Socio-Economic":

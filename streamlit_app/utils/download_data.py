@@ -50,6 +50,7 @@ def download_and_unzip_from_drive(file_id, extract_to):
     """
     zip_path = "glacier_data_download.zip" 
 
+    # Download and extract the data
     download_from_drive(file_id, zip_path, verbose=True)
 
     if not zipfile.is_zipfile(zip_path):
@@ -94,9 +95,11 @@ def ensure_glacier_shapefile():
         "Glacier_1980_1990_2000_2010.dbf",
         "Glacier_1980_1990_2000_2010.prj"
     ]
+    
+    # Check if all files exist
     if not all(os.path.isfile(os.path.join(glacier_dir, f)) for f in required_files):
         st.warning("🧊 Glacier shapefile incomplete or missing. Attempting to download...")
-        zip_file_id = "1_9PlywFpKIvehoJJNqGS392XRdN5QMit"  # Your final working Glacier zip ID
+        zip_file_id = "1_9PlywFpKIvehoJJNqGS392XRdN5QMit"  # File ID for the Glacier data zip
         download_and_unzip_from_drive(zip_file_id, glacier_dir)
     else:
         st.success("✅ Glacier shapefile found.")
