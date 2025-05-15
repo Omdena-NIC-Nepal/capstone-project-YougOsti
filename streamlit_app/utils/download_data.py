@@ -24,7 +24,6 @@ def download_from_drive(file_id, output_path, verbose=False):
         os.makedirs(dir_name, exist_ok=True)
 
     if os.path.exists(output_path):
-        # Skip corrupt or tiny files (likely Git LFS pointers)
         too_small = os.path.getsize(output_path) < 100
         invalid_tif = output_path.endswith(".tif") and not is_valid_tif(output_path)
 
@@ -35,12 +34,11 @@ def download_from_drive(file_id, output_path, verbose=False):
         else:
             if verbose:
                 st.success(f"✅ {os.path.basename(output_path)} already exists; skipping download.")
-            return  # File is valid — skip download
+            return
 
-    # Proceed to download
+    # Download
     gdown.download(url, output_path, quiet=not verbose, fuzzy=True)
 
-    # Validate GeoTIFF again
     if output_path.endswith(".tif") and not is_valid_tif(output_path):
         st.error(f"❌ {os.path.basename(output_path)} is not a valid GeoTIFF after download.")
         os.remove(output_path)
@@ -48,8 +46,7 @@ def download_from_drive(file_id, output_path, verbose=False):
 
 def download_and_unzip_from_drive(file_id, extract_to):
     """
-    Download and extract ZIP file from Google Drive.
-    Only extracts if ZIP is valid.
+    Download and extract a ZIP from Google Drive, flattening all contents.
     """
     zip_path = "temp_glacier_data.zip"
     download_from_drive(file_id, zip_path, verbose=True)
@@ -62,10 +59,16 @@ def download_and_unzip_from_drive(file_id, extract_to):
     os.makedirs(extract_to, exist_ok=True)
 
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(extract_to)
+        for member in zip_ref.infolist():
+            filename = os.path.basename(member.filename)
+            if not filename:
+                continue
+            target_path = os.path.join(extract_to, filename)
+            with zip_ref.open(member) as source, open(target_path, "wb") as target:
+                target.write(source.read())
 
     os.remove(zip_path)
-    st.success(f"✅ Extracted to {extract_to}")
+    st.success(f"✅ Extracted shapefile components to {extract_to}")
 
 def ensure_folder(path: str, drive_folder_link: str):
     """
@@ -81,7 +84,7 @@ def ensure_folder(path: str, drive_folder_link: str):
 
 def ensure_glacier_shapefile():
     """
-    Check glacier shapefile components, or download and extract them.
+    Ensure glacier shapefile components exist or download & extract them.
     """
     glacier_dir = "Data/Raw/Environment_data/Glacier_data"
     required_files = [
@@ -92,14 +95,14 @@ def ensure_glacier_shapefile():
     ]
     if not all(os.path.isfile(os.path.join(glacier_dir, f)) for f in required_files):
         st.warning("🧊 Glacier shapefile incomplete or missing. Attempting to download...")
-        zip_file_id = "1_9PlywFpKIvehoJJNqGS392XRdN5QMit"
+        zip_file_id = "1_9PlywFpKIvehoJJNqGS392XRdN5QMit"  # Your final working Glacier zip ID
         download_and_unzip_from_drive(zip_file_id, glacier_dir)
     else:
         st.success("✅ Glacier shapefile found.")
 
 def download_all_data():
     """
-    Run all data checks and downloads needed for the application.
+    Run all required downloads for app datasets.
     """
     env_folder = "Data/Raw/Environment_data"
     ensure_folder(env_folder,
@@ -112,7 +115,7 @@ def download_all_data():
         ("1h4U5HXM8BTWR1UHSBeapSf8zglxO-uGY", f"{env_folder}/Landcover_2010_Icimod.tif"),
         ("1gcE3uEFuWJa2vANs_jDLw6_ciH_zThBO", f"{env_folder}/Landcover_2015_icimod.tif"),
 
-        # Glacier area CSV
+        # Glacier Area CSV
         ("1AQP2tKoxlIsu3FmQRyBvyrQVF6dRgo3_", f"{env_folder}/Glacier_area_by_HUCs.csv"),
     ]
 
