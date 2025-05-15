@@ -6,42 +6,39 @@ import streamlit as st
 def load_threatened_data(filepath):
     """
     Load and reshape cleaned threatened species CSV.
-    Keeps only columns matching 'threatened species_YYYY' pattern,
-    extracts year, and returns a tidy DataFrame with columns:
-    Year (int), Species (str), Count (float).
+    Detects all columns like 'threatened species_1998', '...Y2007', etc.
+    Returns a tidy DataFrame with columns: Year, Species, Count.
     """
     try:
         df = pd.read_csv(filepath)
 
-        # Normalize columns: handle extra 'Y' in column names
-        df.columns = [
-            col.strip().replace("threatened species_Y", "threatened species_") 
-            for col in df.columns
-        ]
+        # Debug: show columns during development
+        st.write("🔍 Columns in CSV:", df.columns.tolist())
 
-        # Rename main column
-        if 'Major Group of Species' in df.columns:
+        # Rename species column if necessary
+        if "Major Group of Species" in df.columns:
             df = df.rename(columns={"Major Group of Species": "Species"})
 
-        # Identify year columns
-        pattern = re.compile(r'threatened species_(\d{4})$', re.IGNORECASE)
+        # Detect year columns, normalize by removing 'Y' and whitespace
         year_cols = []
         year_map = {}
+
         for col in df.columns:
-            m = pattern.search(col)
-            if m:
-                yr = int(m.group(1))
-                year_cols.append(col)
-                year_map[col] = yr
+            col_clean = col.strip().lower().replace("y", "")  # e.g. "threatened species_2007"
+            match = re.search(r'threatened species[_ ]*(\d{4})$', col_clean)
+            if match:
+                year = int(match.group(1))
+                year_cols.append(col)         # use original column name
+                year_map[col] = year
 
         if not year_cols:
             st.error("⚠️ No 'threatened species_YYYY' columns found.")
             return pd.DataFrame(columns=['Year', 'Species', 'Count'])
 
-        # Keep only Species + year columns
+        # Subset relevant columns
         df_sub = df[['Species'] + year_cols].copy()
 
-        # Melt to long format
+        # Melt wide → long
         df_long = df_sub.melt(
             id_vars='Species',
             value_vars=year_cols,
@@ -49,9 +46,11 @@ def load_threatened_data(filepath):
             value_name='Count'
         )
 
-        # Map column to year
+        # Map year column
         df_long['Year'] = df_long['OrigCol'].map(year_map)
         df_long = df_long.drop(columns=['OrigCol'])
+
+        # Clean types
         df_long['Count'] = pd.to_numeric(df_long['Count'], errors='coerce')
         df_long = df_long.dropna(subset=['Count', 'Year', 'Species'])
 
