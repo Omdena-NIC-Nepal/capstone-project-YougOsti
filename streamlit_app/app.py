@@ -85,14 +85,30 @@ elif dashboard == "Environment":
         "Biodiversity Trends", "Landcover Change", "Climate News Trends", "Glacier Retreat", "Extreme Weather vs Glacier Loss"
     ])
 
-    if page == "Biodiversity Trends":
-        st.subheader("🦋 Threatened Species Trends")
-        df_bio = load_threatened_data("Data/processed/threatened_species_cleaned.csv")
-        if not df_bio.empty:
-            st.dataframe(df_bio.head())
-            species = st.multiselect("Select species:", df_bio['Species'].unique(), default=df_bio['Species'].unique()[:3])
-            if species:
-                plot_threatened_trend(df_bio, species)
+if page == "Biodiversity Trends":
+    st.subheader("🦋 Threatened Species Trends")
+
+    from utils.download_data import download_from_drive
+
+    # Download threatened species CSV from Google Drive
+    drive_id = "1nulzINJWa03itJJuYgZ-zb_ip9lKhTay"
+    local_path = "Data/processed/threatened_species_cleaned.csv"
+    download_from_drive(drive_id, local_path)
+
+    # Load and visualize
+    df_bio = load_threatened_data(local_path)
+    if not df_bio.empty:
+        st.dataframe(df_bio.head())
+
+        species = st.multiselect(
+            "Select species:",
+            df_bio['Species'].unique(),
+            default=df_bio['Species'].unique()[:3]
+        )
+
+        if species:
+            plot_threatened_trend(df_bio, species)
+
     
     elif page == "Landcover Change":
         st.subheader("🗺️ Landcover Change (2005 → 2015)")
