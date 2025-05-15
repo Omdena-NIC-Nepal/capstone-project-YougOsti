@@ -126,16 +126,22 @@ elif dashboard == "Environment":
 
     elif page == "Glacier Retreat":
         st.subheader("🧊 Glacier Retreat")
-        try:
-            import geopandas as gpd
-            shp_path = "Data/Raw/Environment_data/Glacier_data/Glacier_1980_1990_2000_2010.shp"
-            gdf = gpd.read_file(shp_path)
+    try:
+        shp_dir = "Data/Raw/Environment_data/Glacier_data"
+        # Dynamically find the .shp file (in case name changes or varies)
+        shp_files = [f for f in os.listdir(shp_dir) if f.endswith(".shp")]
+        if not shp_files:
+            st.error("❌ No shapefile (.shp) found in Glacier_data folder.")
+        else:
+            shp_path = os.path.join(shp_dir, shp_files[0])
+            gdf = load_glacier_shapefile(shp_path)
             if not gdf.empty:
                 area_df = extract_glacier_area_by_year(gdf)
                 st.dataframe(area_df)
                 plot_glacier_retreat(area_df)
-        except Exception as e:
-            st.error(f"❌ Could not load glacier shapefile: {e}")
+    except Exception as e:
+        st.error(f"❌ Could not load glacier shapefile: {e}")
+
 
     elif page == "Extreme Weather vs Glacier Loss":
         st.subheader("🌡️ Extreme Weather vs Glacier Loss")
