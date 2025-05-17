@@ -5,16 +5,20 @@ from collections import Counter
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import nltk
+import os
 
-# Ensure the necessary NLTK corpus is available
+# Set the path to the nltk_data folder in your project
+nltk_data_path = os.path.join(os.getcwd(), "punkt_tab")  # Adjusted path to your local punkt_tab directory
+
+# Point NLTK to this folder
+nltk.data.path.append(nltk_data_path)
+
+# Ensure the punkt tokenizer is available
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    try:
-        nltk.download('punkt')  # Download the 'punkt' tokenizer for sentence splitting
-    except Exception as e:
-        st.error(f"❌ Failed to download necessary NLTK corpus: {e}")
-        st.stop()  # Stop the app gracefully if the corpus download fails
+    st.error("❌ NLTK punkt tokenizer not found. Please make sure it's included in your project.")
+    st.stop()  # Stop the app gracefully if the corpus is missing
 
 def load_sample_texts():
     """
