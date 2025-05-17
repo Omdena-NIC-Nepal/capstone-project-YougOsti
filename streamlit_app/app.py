@@ -188,42 +188,46 @@ elif dashboard == "Socio-Economic":
 
     if page == "Agricultural Trends":
         st.subheader("🌾 Agricultural Production Trends")
-    
+        
         # Load agricultural data
         df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
-
+        
+        # Clean column names to remove any leading/trailing spaces
+        df_agri.columns = df_agri.columns.str.strip()
+        
         # Check available crops and display them (excluding the 'Year' column)
-        available_crops = df_agri.columns[1:].tolist()  
+        available_crops = df_agri.columns[1:].tolist()  # Skip 'Year' column
         st.write("Available crops:", available_crops)
         
         # Display first few rows to verify the data
         st.dataframe(df_agri.head())
-
+        
         # Ensure the default crops are in the available crops list
         default_crops = ["Paddy", "Maize", "Wheat"]
-
+        
         # Adjust the default crops to only include those that exist in the available crops list
         valid_default_crops = [crop for crop in default_crops if crop in available_crops]
-
+        
         # If no valid default crops are found, use the first few crops as the default
         if not valid_default_crops:
             valid_default_crops = available_crops[:3]
-
+        
         # Now pass the valid default crops to the multiselect widget
         crops = st.multiselect("Choose crops:", available_crops, default=valid_default_crops)
-
+        
         # Check if any crops are selected
         if not crops:
             st.warning("⚠️ Please select at least one crop.")
         else:
             # Ensure the selected crops have valid data to plot
             selected_data = df_agri[crops]
-
+            
             # Check if there is any valid data to plot
             if selected_data.isnull().all().any():
                 st.warning("⚠️ No valid data available for the selected crops.")
             else:
                 plot_crop_trends(df_agri, crops)
+
 
     elif page == "Crop Forecast":
         st.subheader("🌾 Crop Forecast")

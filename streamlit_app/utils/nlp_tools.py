@@ -34,7 +34,7 @@ def load_sample_texts():
     adversely affecting downstream communities that rely on glacier meltwater.
     """
 
-    # Split into sentences
+    # Split into sentences using TextBlob
     blob = TextBlob(text)
     return [str(sentence).strip() for sentence in blob.sentences]
 
