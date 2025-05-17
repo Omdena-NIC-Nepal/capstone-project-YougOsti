@@ -6,8 +6,18 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import nltk
 
-# Ensure that the necessary NLTK corpus is available
-nltk.download('punkt')  # Download the punkt tokenizer for sentence splitting
+# Ensure that the necessary NLTK corpus is available using caching
+@st.cache_resource
+def download_nltk_corpora():
+    try:
+        # Download the 'punkt' tokenizer
+        nltk.download('punkt')
+        st.success("✅ NLTK punkt corpus downloaded successfully!")
+    except Exception as e:
+        st.error(f"❌ Error downloading NLTK punkt corpus: {e}")
+    
+# Call the download_nltk_corpora function to trigger the download (it will be cached)
+download_nltk_corpora()
 
 def load_sample_texts():
     """
