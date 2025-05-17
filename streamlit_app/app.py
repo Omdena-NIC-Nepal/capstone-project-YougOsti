@@ -212,25 +212,4 @@ elif dashboard == "Socio-Economic":
 
     elif page == "Crop Forecast":
         st.subheader("🌾 Crop Forecast")
-        df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
-        crop = st.selectbox("Select a crop to forecast:", df_agri.columns[1:])
-        year = st.slider("Forecast year:", 2025, 2040, 2035)
-        crop_df = prepare_crop_data(df_agri, crop)
-        model, all_years = train_crop_model(crop_df, year)
-        plot_crop_forecast(all_years, crop_df, crop)
-
-    elif page == "Climate Agriculture Correlation":
-        st.subheader("🌿 Climate–Agriculture Correlation")
-        df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
-        climate_var = st.selectbox("Climate Variable:", ["Temp_2m", "Precip"])
-        crop = st.selectbox("Select crop:", df_agri.columns[1:])
-        merged_df = merge_climate_agriculture(df_clean, df_agri, climate_var, crop)
-        st.dataframe(merged_df.head())
-
-        label_map = {"Temp_2m": "Temperature (°C)", "Precip": "Precipitation (mm)"}
-        climate_label = label_map.get(climate_var, climate_var)
-        plot_climate_crop_correlation(merged_df, climate_label)
-
-        corr = calculate_correlation(merged_df)
-        if corr is not None:
-            st.markdown(f"**Pearson r:** {corr:.2f}")
+        df_agri = load_agriculture_data("processed/

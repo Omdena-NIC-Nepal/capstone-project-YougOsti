@@ -4,20 +4,10 @@ from textblob import TextBlob
 from collections import Counter
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import textblob
+import nltk
 
-# Ensure that the necessary TextBlob corpora are available using caching
-@st.cache_resource
-def download_textblob_corpora():
-    try:
-        # Download the necessary corpora for TextBlob
-        textblob.download_corpora()
-        st.success("✅ TextBlob corpora downloaded successfully!")
-    except Exception as e:
-        st.error(f"❌ Error downloading TextBlob corpora: {e}")
-
-# Trigger the download function at the start of the app
-download_textblob_corpora()
+# Ensure that the necessary NLTK corpus is available
+nltk.download('punkt')  # Download the punkt tokenizer for sentence splitting
 
 def load_sample_texts():
     """
@@ -44,7 +34,7 @@ def load_sample_texts():
     adversely affecting downstream communities that rely on glacier meltwater.
     """
 
-    # Split into sentences using TextBlob
+    # Split into sentences
     blob = TextBlob(text)
     return [str(sentence).strip() for sentence in blob.sentences]
 

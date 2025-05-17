@@ -19,6 +19,7 @@ def load_agriculture_data(filepath):
 
         # Strip leading/trailing whitespaces from column names and ensure no extra metadata
         df.columns = df.columns.str.strip()
+
         # Remove any column names that may be non-crop metadata (e.g., "oid sha256", "size")
         df = df.loc[:, ~df.columns.str.contains("oid|size", case=False)]
 
