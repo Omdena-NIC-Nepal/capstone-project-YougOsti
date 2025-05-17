@@ -10,7 +10,11 @@ import nltk
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt')  # Download the 'punkt' tokenizer for sentence splitting
+    try:
+        nltk.download('punkt')  # Download the 'punkt' tokenizer for sentence splitting
+    except Exception as e:
+        st.error(f"❌ Failed to download necessary NLTK corpus: {e}")
+        st.stop()  # Stop the app gracefully if the corpus download fails
 
 def load_sample_texts():
     """
