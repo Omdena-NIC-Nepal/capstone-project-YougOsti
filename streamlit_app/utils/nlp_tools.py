@@ -4,20 +4,20 @@ from textblob import TextBlob
 from collections import Counter
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import nltk
+import textblob
 
-# Ensure that the necessary NLTK corpus is available using caching
+# Ensure that the necessary TextBlob corpora are available using caching
 @st.cache_resource
-def download_nltk_corpora():
+def download_textblob_corpora():
     try:
-        # Download the 'punkt' tokenizer
-        nltk.download('punkt')
-        st.success("✅ NLTK punkt corpus downloaded successfully!")
+        # Download the necessary corpora for TextBlob
+        textblob.download_corpora()
+        st.success("✅ TextBlob corpora downloaded successfully!")
     except Exception as e:
-        st.error(f"❌ Error downloading NLTK punkt corpus: {e}")
-    
-# Call the download_nltk_corpora function to trigger the download (it will be cached)
-download_nltk_corpora()
+        st.error(f"❌ Error downloading TextBlob corpora: {e}")
+
+# Trigger the download function at the start of the app
+download_textblob_corpora()
 
 def load_sample_texts():
     """

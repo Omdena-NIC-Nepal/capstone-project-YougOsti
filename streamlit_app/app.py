@@ -2,6 +2,10 @@ import os
 import streamlit as st
 from utils.preprocess import load_data, clean_data
 from utils.download_data import download_all_data
+from utils.agriculture import (
+    load_agriculture_data, plot_crop_trends, prepare_crop_data, train_crop_model, plot_crop_forecast
+)
+from utils.climate_agri_corr import merge_climate_agriculture, plot_climate_crop_correlation, calculate_correlation
 
 # ─── Initial Setup ────────────────────────────────────────────────────
 download_all_data()
@@ -120,25 +124,19 @@ elif dashboard == "Environment":
 
     elif page == "Climate News Trends":
         st.subheader("🗞️ NLP on Climate Reports")
-        # Ensure the NLTK corpus is downloaded
         import nltk
-        nltk.download('punkt')  # Make sure the 'punkt' tokenizer is available
+        nltk.download('punkt')  # Ensure that 'punkt' tokenizer is available
         
-        # Load the sample texts
         texts = load_sample_texts()
 
-        # Check if texts are empty
         if not texts:
             st.warning("⚠️ No text data available for analysis.")
         else:
-            # Display sentiment analysis results
             sentiment_df = analyze_sentiment(texts)
             st.dataframe(sentiment_df)
 
-            # Display wordcloud
             plot_wordcloud(texts)
 
-            # Display keyword extraction results
             keywords_df = extract_keywords(texts, num_keywords=10)
             st.dataframe(keywords_df)
 
@@ -146,7 +144,6 @@ elif dashboard == "Environment":
         st.subheader("🧊 Glacier Retreat")
         try:
             shp_dir = "Data/Raw/Environment_data/Glacier_data"
-            # Dynamically find the .shp file (in case name changes or varies)
             shp_files = [f for f in os.listdir(shp_dir) if f.endswith(".shp")]
             if not shp_files:
                 st.error("❌ No shapefile (.shp) found in Glacier_data folder.")
@@ -177,11 +174,6 @@ elif dashboard == "Environment":
 
 # ─── Socio-Economic ───────────────────────────────────────────────────
 elif dashboard == "Socio-Economic":
-    from utils.agriculture import (
-        load_agriculture_data, plot_crop_trends, prepare_crop_data, train_crop_model, plot_crop_forecast
-    )
-    from utils.climate_agri_corr import merge_climate_agriculture, plot_climate_crop_correlation, calculate_correlation
-
     page = st.sidebar.selectbox("Socio-Economic Dashboard", [
         "Agricultural Trends", "Crop Forecast", "Climate Agriculture Correlation"
     ])
@@ -191,43 +183,32 @@ elif dashboard == "Socio-Economic":
         
         # Load agricultural data
         df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
-        
-        # Clean column names to remove any leading/trailing spaces
-        df_agri.columns = df_agri.columns.str.strip()
-        
+
+        # Print column names and the first few rows to debug
+        st.write("Columns in DataFrame:", df_agri.columns)  # Show available column names
+        st.dataframe(df_agri.head())  # Display first few rows to check data structure
+
         # Check available crops and display them (excluding the 'Year' column)
         available_crops = df_agri.columns[1:].tolist()  # Skip 'Year' column
-        st.write("Available crops:", available_crops)
-        
-        # Display first few rows to verify the data
-        st.dataframe(df_agri.head())
-        
+        st.write("Available crops:", available_crops)  # Print available crops to debug
+
         # Ensure the default crops are in the available crops list
         default_crops = ["Paddy", "Maize", "Wheat"]
-        
-        # Adjust the default crops to only include those that exist in the available crops list
         valid_default_crops = [crop for crop in default_crops if crop in available_crops]
-        
-        # If no valid default crops are found, use the first few crops as the default
+
         if not valid_default_crops:
             valid_default_crops = available_crops[:3]
-        
-        # Now pass the valid default crops to the multiselect widget
+
         crops = st.multiselect("Choose crops:", available_crops, default=valid_default_crops)
-        
-        # Check if any crops are selected
-        if not crops:
-            st.warning("⚠️ Please select at least one crop.")
-        else:
-            # Ensure the selected crops have valid data to plot
+
+        # Ensure the selected crops have valid data to plot
+        if crops:
             selected_data = df_agri[crops]
-            
-            # Check if there is any valid data to plot
+
             if selected_data.isnull().all().any():
                 st.warning("⚠️ No valid data available for the selected crops.")
             else:
                 plot_crop_trends(df_agri, crops)
-
 
     elif page == "Crop Forecast":
         st.subheader("🌾 Crop Forecast")
