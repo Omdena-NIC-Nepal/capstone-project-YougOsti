@@ -120,10 +120,27 @@ elif dashboard == "Environment":
 
     elif page == "Climate News Trends":
         st.subheader("🗞️ NLP on Climate Reports")
+        # Ensure the NLTK corpus is downloaded
+        import nltk
+        nltk.download('punkt')  # Make sure the 'punkt' tokenizer is available
+        
+        # Load the sample texts
         texts = load_sample_texts()
-        st.dataframe(analyze_sentiment(texts))
-        plot_wordcloud(texts)
-        st.dataframe(extract_keywords(texts, num_keywords=10))
+
+        # Check if texts are empty
+        if not texts:
+            st.warning("⚠️ No text data available for analysis.")
+        else:
+            # Display sentiment analysis results
+            sentiment_df = analyze_sentiment(texts)
+            st.dataframe(sentiment_df)
+
+            # Display wordcloud
+            plot_wordcloud(texts)
+
+            # Display keyword extraction results
+            keywords_df = extract_keywords(texts, num_keywords=10)
+            st.dataframe(keywords_df)
 
     elif page == "Glacier Retreat":
         st.subheader("🧊 Glacier Retreat")
@@ -173,7 +190,21 @@ elif dashboard == "Socio-Economic":
         st.subheader("🌾 Agricultural Production Trends")
         df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
         st.dataframe(df_agri.head())
-        crops = st.multiselect("Choose crops:", df_agri.columns[1:], default=["Paddy", "Maize", "Wheat"])
+
+        # Ensure the default crops are in the available crops list
+        default_crops = ["Paddy", "Maize", "Wheat"]
+        available_crops = df_agri.columns[1:].tolist()
+
+        # Adjust the default crops to only include those that exist in the available crops list
+        valid_default_crops = [crop for crop in default_crops if crop in available_crops]
+
+        # If no valid default crops are found, use the first few crops as the default
+        if not valid_default_crops:
+            valid_default_crops = available_crops[:3]
+
+        # Now pass the valid default crops to the multiselect widget
+        crops = st.multiselect("Choose crops:", available_crops, default=valid_default_crops)
+
         if crops:
             plot_crop_trends(df_agri, crops)
 
