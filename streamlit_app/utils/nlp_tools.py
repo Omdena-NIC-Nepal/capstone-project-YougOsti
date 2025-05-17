@@ -1,11 +1,13 @@
-# utils/nlp_tools.py
-
 import streamlit as st
 import pandas as pd
 from textblob import TextBlob
 from collections import Counter
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+import nltk
+
+# Ensure that the necessary NLTK corpus is available
+nltk.download('punkt')  # Download the punkt tokenizer for sentence splitting
 
 def load_sample_texts():
     """

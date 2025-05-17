@@ -1,5 +1,3 @@
-# utils/agriculture.py
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -101,6 +99,10 @@ def train_crop_model(crop_df, forecast_until):
     Train linear regression model on crop yield data.
     """
     try:
+        if crop_df.empty:
+            st.error("❌ No data available to train the model.")
+            return None, None
+
         X = crop_df[['Year']]
         y = crop_df['Yield']
         
