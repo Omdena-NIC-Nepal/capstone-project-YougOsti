@@ -12,17 +12,9 @@ def load_agriculture_data(filepath):
     """
     Loads and processes agricultural production data.
     Transposes to make 'Year' a column and converts '1998/99' → 1998.
-    Also cleans up column names.
     """
     try:
         df = pd.read_csv(filepath, index_col=0)
-
-        # Strip leading/trailing whitespaces from column names and ensure no extra metadata
-        df.columns = df.columns.str.strip()
-
-        # Remove any column names that may be non-crop metadata (e.g., "oid sha256", "size")
-        df = df.loc[:, ~df.columns.str.contains("oid|size", case=False)]
-
         df = df.transpose()
         df.index.name = "Year"
         df.reset_index(inplace=True)
@@ -37,6 +29,7 @@ def load_agriculture_data(filepath):
     except Exception as e:
         st.error(f"❌ Error loading agricultural data: {e}")
         return pd.DataFrame()
+    
 
 # ─────────────────────────────────────────────────────────────
 # ✅ 2. EDA: Plot selected crop trends

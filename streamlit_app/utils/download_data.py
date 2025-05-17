@@ -20,9 +20,11 @@ def download_from_drive(file_id, output_path, verbose=False):
     """
     url = f"https://drive.google.com/uc?id={file_id}"
     dir_name = os.path.dirname(output_path)
+    
     if dir_name:
         os.makedirs(dir_name, exist_ok=True)
 
+    # Check if the file already exists and is valid
     if os.path.exists(output_path):
         too_small = os.path.getsize(output_path) < 100
         invalid_tif = output_path.endswith(".tif") and not is_valid_tif(output_path)
@@ -36,9 +38,10 @@ def download_from_drive(file_id, output_path, verbose=False):
                 st.success(f"✅ {os.path.basename(output_path)} already exists; skipping download.")
             return
 
-    # Download
+    # Download the file
     gdown.download(url, output_path, quiet=not verbose, fuzzy=True)
 
+    # Verify the downloaded GeoTIFF
     if output_path.endswith(".tif") and not is_valid_tif(output_path):
         st.error(f"❌ {os.path.basename(output_path)} is not a valid GeoTIFF after download.")
         os.remove(output_path)

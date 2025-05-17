@@ -8,13 +8,16 @@ from utils.agriculture import (
 from utils.climate_agri_corr import merge_climate_agriculture, plot_climate_crop_correlation, calculate_correlation
 
 # ─── Initial Setup ────────────────────────────────────────────────────
+# Download all necessary datasets
 download_all_data()
 
+# Load climate data
 csv_path = "Data/Raw/Weather&Climate_data/dailyclimate_OpenDataNpl.csv"
 gdrive_file_id = "1WlyTmR7PNXsOsxcdBDfvYrugn3tfyT5f"
 df_raw = load_data(csv_path, gdrive_file_id)
 df_clean = clean_data(df_raw)
 
+# Create directory for processed data and save cleaned data
 os.makedirs("processed", exist_ok=True)
 df_clean.to_csv("processed/cleaned_dailyclimate.csv", index=False)
 
@@ -212,4 +215,25 @@ elif dashboard == "Socio-Economic":
 
     elif page == "Crop Forecast":
         st.subheader("🌾 Crop Forecast")
-        df_agri = load_agriculture_data("processed/
+        df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
+        crop = st.selectbox("Select a crop to forecast:", df_agri.columns[1:])
+        year = st.slider("Forecast year:", 2025, 2040, 2035)
+        crop_df = prepare_crop_data(df_agri, crop)
+        model, all_years = train_crop_model(crop_df, year)
+        plot_crop_forecast(all_years, crop_df, crop)
+
+    elif page == "Climate Agriculture Correlation":
+        st.subheader("🌿 Climate–Agriculture Correlation")
+        df_agri = load_agriculture_data("processed/cleaned_agricultural_data.csv")
+        climate_var = st.selectbox("Climate Variable:", ["Temp_2m", "Precip"])
+        crop = st.selectbox("Select crop:", df_agri.columns[1:])
+        merged_df = merge_climate_agriculture(df_clean, df_agri, climate_var, crop)
+        st.dataframe(merged_df.head())
+
+        label_map = {"Temp_2m": "Temperature (°C)", "Precip": "Precipitation (mm)"}
+        climate_label = label_map.get(climate_var, climate_var)
+        plot_climate_crop_correlation(merged_df, climate_label)
+
+        corr = calculate_correlation(merged_df)
+        if corr is not None:
+            st.markdown(f"**Pearson r:** {corr:.2f}")

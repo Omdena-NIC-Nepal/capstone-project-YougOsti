@@ -6,8 +6,11 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import nltk
 
-# Ensure that the necessary NLTK corpus is available
-nltk.download('punkt')  # Download the punkt tokenizer for sentence splitting
+# Ensure the necessary NLTK corpus is available
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')  # Download the 'punkt' tokenizer for sentence splitting
 
 def load_sample_texts():
     """
