@@ -2,7 +2,9 @@
 ## `requirements.txt`
 
 # This file is used to install the required packages for the Streamlit app.
-streamlit
+streamlit>=1.12.0
+textblob
+nltk
 pandas
 matplotlib
 seaborn
@@ -10,6 +12,8 @@ geopandas
 rasterio
 scikit-learn
 wordcloud
-nltk
 gdown
-textblob
+rich
+markdown-it-py
+pygments
+mdurl
