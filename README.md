@@ -57,4 +57,4 @@ capstone-project-YougOsti/
 Data Download:
 Raw data can be downloaded from 'Raw' folder and cleaned data can be downloaded from 'processed' folder.
 
-App Link : https://omdenanic-first-proj-voq7ev3gd9cm3qvuz62kdk.streamlit.app/
+"App Link : https://omdenanic-first-proj-voq7ev3gd9cm3qvuz62kdk.streamlit.app/"
