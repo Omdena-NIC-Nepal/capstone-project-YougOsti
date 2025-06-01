@@ -1,4 +1,4 @@
-import os
+iimport os
 import streamlit as st
 from utils.preprocess import load_data, clean_data
 from utils.download_data import download_all_data
@@ -6,10 +6,14 @@ from utils.agriculture import (
     load_agriculture_data, plot_crop_trends, prepare_crop_data, train_crop_model, plot_crop_forecast
 )
 from utils.climate_agri_corr import merge_climate_agriculture, plot_climate_crop_correlation, calculate_correlation
+import nltk
 
 # ─── Initial Setup ────────────────────────────────────────────────────
 # Download all necessary datasets
 download_all_data()
+
+# Ensure NLTK punkt tokenizer is available
+nltk.download('punkt')
 
 # Load climate data
 csv_path = "Data/Raw/Weather&Climate_data/dailyclimate_OpenDataNpl.csv"
@@ -127,9 +131,10 @@ elif dashboard == "Environment":
 
     elif page == "Climate News Trends":
         st.subheader("🗞️ NLP on Climate Reports")
+        # Ensure that 'punkt' tokenizer is available
         import nltk
-        nltk.download('punkt')  # Ensure that 'punkt' tokenizer is available
-        
+        nltk.download('punkt')
+
         texts = load_sample_texts()
 
         if not texts:
